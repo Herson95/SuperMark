@@ -8,6 +8,7 @@ namespace SuperMark
     using Microsoft.Extensions.Hosting;
     using Data;
 
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
