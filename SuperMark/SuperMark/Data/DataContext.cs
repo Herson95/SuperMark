@@ -1,8 +1,9 @@
 ﻿namespace SuperMark.Data
 {
     using Entities;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    public partial class DataContext : DbContext
+    public partial class DataContext : IdentityDbContext<TblUsuario>
     {
         public DataContext()
         {
@@ -12,6 +13,7 @@
         {
         }
 
+        public virtual DbSet<TblCargo> TblCargo { get; set; }
         public virtual DbSet<Bitacora> Bitacora { get; set; }
         public virtual DbSet<TblCategoria> TblCategoria { get; set; }
         public virtual DbSet<TblCliente> TblCliente { get; set; }
@@ -42,6 +44,8 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Bitacora>(entity =>
             {
                 entity.HasKey(e => e.IdBitacora)
