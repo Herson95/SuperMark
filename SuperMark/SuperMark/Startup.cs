@@ -25,7 +25,6 @@ namespace SuperMark
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddTransient<SeedDb>();
 
             services.AddControllersWithViews();
         }
