@@ -9,6 +9,7 @@ namespace SuperMark
     using Data;
     using SuperMark.Data.Entities;
     using Microsoft.AspNetCore.Identity;
+    using SuperMark.Helpers;
 
     public class Startup
     {
@@ -41,7 +42,8 @@ namespace SuperMark
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-
+            services.AddTransient<SeedDb>();
+            services.AddScoped<IUsuarioHelper, UsuarioHelper>();
             services.AddControllersWithViews();
         }
 

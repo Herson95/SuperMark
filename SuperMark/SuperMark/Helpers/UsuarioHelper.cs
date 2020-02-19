@@ -3,7 +3,9 @@
 namespace SuperMark.Helpers
 {
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using SuperMark.Data.Entities;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class UsuarioHelper : IUsuarioHelper
@@ -24,6 +26,15 @@ namespace SuperMark.Helpers
         {
             return await this.userManager.FindByEmailAsync(email);
         }
+        public async Task<List<TblUsuario>> GetUsersAsync()
+        {
+            return await this.userManager.Users.ToListAsync();
+        }
 
+        //Rertorna true si existen usuarios registrados, false si no hay usuarios registrados
+        public async Task<bool> AnyUserAsync()
+        {
+            return await this.userManager.Users.FirstOrDefaultAsync() == null ? false: true;
+        }
     }
 }
