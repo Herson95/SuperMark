@@ -28,7 +28,7 @@ namespace SuperMark.Helpers
         }
         public async Task<List<TblUsuario>> GetUsersAsync()
         {
-            return await this.userManager.Users.ToListAsync();
+            return await this.userManager.Users.Include(x=>x.Cargo).ToListAsync();
         }
 
         //Rertorna true si existen usuarios registrados, false si no hay usuarios registrados
