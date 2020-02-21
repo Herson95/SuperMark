@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperMark.Data;
 
 namespace SuperMark.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200221170840_ProductosPrimaryKey")]
+    partial class ProductosPrimaryKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -721,9 +723,6 @@ namespace SuperMark.Migrations
                         .HasMaxLength(20)
                         .IsUnicode(false);
 
-                    b.Property<decimal?>("Costo")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
@@ -747,9 +746,6 @@ namespace SuperMark.Migrations
 
                     b.Property<decimal?>("PrecioNeto")
                         .HasColumnType("numeric(9, 2)");
-
-                    b.Property<int>("StockMinimo")
-                        .HasColumnType("int");
 
                     b.HasKey("IdProducto")
                         .HasName("PK__Tbl_Prod__785B009E90AE744C");

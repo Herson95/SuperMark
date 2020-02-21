@@ -44,6 +44,9 @@ namespace SuperMark
 
             services.AddTransient<SeedDb>();
             services.AddScoped<IUsuarioHelper, UsuarioHelper>();
+            services.AddScoped<IProductosRepository, ProductosRepository>();
+            services.AddScoped<ICategoriasRepository, CategoriasRepository>();
+            services.AddScoped<IMarcasRepository, MarcasRepository>();
             services.AddControllersWithViews();
         }
 

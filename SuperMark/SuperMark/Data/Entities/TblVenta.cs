@@ -24,6 +24,8 @@ namespace SuperMark.Data.Entities
         public int EstadoFactura { get; set; }
         public int Estado { get; set; }
 
+        public TblUsuario usuario { get; set; }
+
         public virtual TblPedido IdPedidoNavigation { get; set; }
         public virtual ICollection<TblDetalleVenta> TblDetalleVenta { get; set; }
     }

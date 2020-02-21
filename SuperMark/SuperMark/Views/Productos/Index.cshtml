@@ -1,0 +1,102 @@
+﻿@model IEnumerable<SuperMark.Data.Entities.TblProducto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Productos</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index">Productos</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h3 class="card-title">Tabla General de Productos</h3>
+                </div>
+                <div class="card-body  table-responsive p-0" >
+                    <a asp-action="Create" class="btn btn-link fa-pull-right" >Crear Nuevo</a>
+                    <br />
+                    <table class="table  table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Producto
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cantidad)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Costo)
+                                </th>
+                                <th>
+                                    Precio
+                                </th>
+
+                                <th>
+                                    Categoria
+                                </th>
+                                <th>
+                                    Marca
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NombreProducto)
+                                </td>
+                                @if (item.Cantidad <= item.StockMinimo)
+                                {
+                                    <td class="text-danger"> 
+                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Costo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrecioDetalle)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdMarcaNavigation.Nombre)
+                                </td>
+                                <td>
+                                    <a asp-action="Delete" asp-route-id="@item.IdProducto" class="btn btn-outline-danger "><span class="fa fa-trash"></span></a>
+                                    <a asp-action="Details" asp-route-id="@item.IdProducto" class="btn btn-outline-warning "><span class="fa fa-eye"></span></a>
+                                    <a asp-action="Edit" asp-route-id="@item.IdProducto" class="btn btn-outline-info "> <span class="fa fa-edit"></span></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

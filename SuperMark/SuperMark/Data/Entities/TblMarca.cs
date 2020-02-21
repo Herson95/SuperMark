@@ -3,7 +3,7 @@ namespace SuperMark.Data.Entities
 {
     using System;
     using System.Collections.Generic;
-    public partial class TblMarca
+    public partial class TblMarca 
     {
         public TblMarca()
         {
@@ -15,6 +15,7 @@ namespace SuperMark.Data.Entities
         public string Descripcion { get; set; }
         public int? Estado { get; set; }
 
+      
         public virtual ICollection<TblProducto> TblProducto { get; set; }
     }
 }

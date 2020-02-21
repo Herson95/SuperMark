@@ -7,7 +7,7 @@ namespace SuperMark.Data.Entities
     {
         public int IdDetallePedido { get; set; }
         public int IdPedido { get; set; }
-        public string CodigoProducto { get; set; }
+        public int IdProducto { get; set; }
         public int Cantidad { get; set; }
         public int Estado { get; set; }
 

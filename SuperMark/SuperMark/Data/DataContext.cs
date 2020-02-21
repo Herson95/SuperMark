@@ -163,14 +163,14 @@
 
                 entity.ToTable("Tbl_DetalleCompra");
 
-                entity.Property(e => e.CodigoProducto)
+                entity.Property(e => e.IdProducto)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.CodigoProductoNavigation)
+                entity.HasOne(d => d.IdProductoNavigation)
                     .WithMany(p => p.TblDetalleCompra)
-                    .HasForeignKey(d => d.CodigoProducto)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Fk_DProduccion_Tbl_Producto");
 
@@ -189,14 +189,14 @@
 
                 entity.Property(e => e.IdDetalleInventario).HasColumnName("Id_DetalleInventario");
 
-                entity.Property(e => e.CodigoProducto)
+                entity.Property(e => e.IdProducto)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.CodigoProductoNavigation)
                     .WithMany(p => p.TblDetalleInventario)
-                    .HasForeignKey(d => d.CodigoProducto)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Tbl_DetalleInventario_Tbl_Producto");
 
@@ -214,14 +214,14 @@
 
                 entity.ToTable("Tbl_DetallePedido");
 
-                entity.Property(e => e.CodigoProducto)
+                entity.Property(e => e.IdProducto)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.CodigoProductoNavigation)
                     .WithMany(p => p.TblDetallePedido)
-                    .HasForeignKey(d => d.CodigoProducto)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Fk_Tbl_DetallePedido_Tbl_Producto");
 
@@ -239,7 +239,7 @@
 
                 entity.ToTable("Tbl_DetalleVenta");
 
-                entity.Property(e => e.CodigoProducto)
+                entity.Property(e => e.IdProducto)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -248,7 +248,7 @@
 
                 entity.HasOne(d => d.CodigoProductoNavigation)
                     .WithMany(p => p.TblDetalleVenta)
-                    .HasForeignKey(d => d.CodigoProducto)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Fk_Tbl_DetalleVenta_Tbl_Producto");
 
@@ -332,7 +332,7 @@
 
                 entity.ToTable("Tbl_ImagenProducto");
 
-                entity.Property(e => e.CodigoProducto)
+                entity.Property(e => e.IdProducto)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -343,7 +343,7 @@
 
                 entity.HasOne(d => d.CodigoProductoNavigation)
                     .WithMany(p => p.TblImagenProducto)
-                    .HasForeignKey(d => d.CodigoProducto)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Fk_ImagenProducto_Tbl_Producto");
             });
@@ -431,7 +431,7 @@
 
             modelBuilder.Entity<TblProducto>(entity =>
             {
-                entity.HasKey(e => e.CodigoProducto)
+                entity.HasKey(e => e.IdProducto)
                     .HasName("PK__Tbl_Prod__785B009E90AE744C");
 
                 entity.ToTable("Tbl_Producto");
@@ -541,7 +541,7 @@
 
                 entity.Property(e => e.IdUbicacion).HasColumnName("Id_Ubicacion");
 
-                entity.Property(e => e.CodigoProducto)
+                entity.Property(e => e.IdProducto)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -550,7 +550,7 @@
 
                 entity.HasOne(d => d.CodigoProductoNavigation)
                     .WithMany(p => p.TblUbicacion)
-                    .HasForeignKey(d => d.CodigoProducto)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Tbl_Ubicacion_Tbl_Producto");
 

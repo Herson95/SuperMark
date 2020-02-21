@@ -5,7 +5,7 @@ namespace SuperMark.Data
 	using SuperMark.Data.Entities;
 	using System.Linq;
 	using System.Threading.Tasks;
-	public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
+	public class GenericRepository<T> : IGenericRepository<T> where T : class
 	{
 		private readonly DataContext context;
 		public GenericRepository(DataContext context)
@@ -18,12 +18,7 @@ namespace SuperMark.Data
 			return this.context.Set<T>().AsNoTracking();
 		}
 
-		public async Task<T> GetByIdAsync(int id)
-		{
-			return await this.context.Set<T>()
-				.AsNoTracking()
-				.FirstOrDefaultAsync(e => e.Id == id);
-		}
+		
 
 		public async Task CreateAsync(T entity)
 		{
@@ -42,13 +37,7 @@ namespace SuperMark.Data
 			this.context.Set<T>().Remove(entity);
 			await SaveAllAsync();
 		}
-
-		public async Task<bool> ExistAsync(int id)
-		{
-			return await this.context.Set<T>().AnyAsync(e => e.Id == id);
-
-		}
-
+	
 		public async Task<bool> SaveAllAsync()
 		{
 			return await this.context.SaveChangesAsync() > 0;

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperMark.Data;
 
 namespace SuperMark.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200221151124_Productos")]
+    partial class Productos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -343,23 +345,24 @@ namespace SuperMark.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<string>("CodigoProducto")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
                     b.Property<int?>("Estado")
                         .HasColumnType("int");
 
                     b.Property<int>("IdCompra")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int")
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
                     b.HasKey("IdDetalleCompra")
                         .HasName("PK__Tbl_Deta__2BD8C21E89008536");
 
-                    b.HasIndex("IdCompra");
+                    b.HasIndex("CodigoProducto");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("IdCompra");
 
                     b.ToTable("Tbl_DetalleCompra");
                 });
@@ -375,19 +378,20 @@ namespace SuperMark.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdInventario")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int")
+                    b.Property<string>("CodigoProducto")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
 
+                    b.Property<int>("IdInventario")
+                        .HasColumnType("int");
+
                     b.HasKey("IdDetalleInventario");
 
-                    b.HasIndex("IdInventario");
+                    b.HasIndex("CodigoProducto");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("IdInventario");
 
                     b.ToTable("Tbl_DetalleInventario");
                 });
@@ -402,23 +406,24 @@ namespace SuperMark.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<string>("CodigoProducto")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int")
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
                     b.HasKey("IdDetallePedido")
                         .HasName("PK__Tbl_Deta__48AFFD9500CF4AEC");
 
-                    b.HasIndex("IdPedido");
+                    b.HasIndex("CodigoProducto");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("Tbl_DetallePedido");
                 });
@@ -433,13 +438,14 @@ namespace SuperMark.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int")
+                    b.Property<string>("CodigoProducto")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdVenta")
                         .HasColumnType("int");
@@ -450,7 +456,7 @@ namespace SuperMark.Migrations
                     b.HasKey("IdDetalleVenta")
                         .HasName("PK__Tbl_Deta__AAA5CEC2D8E809F3");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("CodigoProducto");
 
                     b.HasIndex("IdVenta");
 
@@ -553,6 +559,12 @@ namespace SuperMark.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CodigoProducto")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
                     b.Property<string>("Descripcion")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
@@ -561,15 +573,10 @@ namespace SuperMark.Migrations
                     b.Property<int?>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int")
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
                     b.HasKey("IdImagenProducto")
                         .HasName("PK__Tbl_Imag__B5894BD95DD7FFD0");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("CodigoProducto");
 
                     b.ToTable("Tbl_ImagenProducto");
                 });
@@ -708,21 +715,13 @@ namespace SuperMark.Migrations
 
             modelBuilder.Entity("SuperMark.Data.Entities.TblProducto", b =>
                 {
-                    b.Property<int>("IdProducto")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
                     b.Property<string>("CodigoProducto")
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
 
-                    b.Property<decimal?>("Costo")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
 
                     b.Property<int>("Estado")
                         .HasColumnType("int");
@@ -748,10 +747,7 @@ namespace SuperMark.Migrations
                     b.Property<decimal?>("PrecioNeto")
                         .HasColumnType("numeric(9, 2)");
 
-                    b.Property<int>("StockMinimo")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdProducto")
+                    b.HasKey("CodigoProducto")
                         .HasName("PK__Tbl_Prod__785B009E90AE744C");
 
                     b.HasIndex("IdCategoria");
@@ -884,8 +880,9 @@ namespace SuperMark.Migrations
                     b.Property<int>("CantidadProductos")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int")
+                    b.Property<string>("CodigoProducto")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
 
@@ -895,7 +892,7 @@ namespace SuperMark.Migrations
 
                     b.HasKey("IdUbicacion");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("CodigoProducto");
 
                     b.HasIndex("IdSucursal");
 
@@ -1135,46 +1132,46 @@ namespace SuperMark.Migrations
 
             modelBuilder.Entity("SuperMark.Data.Entities.TblDetalleCompra", b =>
                 {
+                    b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
+                        .WithMany("TblDetalleCompra")
+                        .HasForeignKey("CodigoProducto")
+                        .HasConstraintName("Fk_DProduccion_Tbl_Producto")
+                        .IsRequired();
+
                     b.HasOne("SuperMark.Data.Entities.TblCompra", "IdCompraNavigation")
                         .WithMany("TblDetalleCompra")
                         .HasForeignKey("IdCompra")
                         .HasConstraintName("Fk_DProduccion_Tbl_Produc")
                         .IsRequired();
-
-                    b.HasOne("SuperMark.Data.Entities.TblProducto", "IdProductoNavigation")
-                        .WithMany("TblDetalleCompra")
-                        .HasForeignKey("IdProducto")
-                        .HasConstraintName("Fk_DProduccion_Tbl_Producto")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SuperMark.Data.Entities.TblDetalleInventario", b =>
                 {
+                    b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
+                        .WithMany("TblDetalleInventario")
+                        .HasForeignKey("CodigoProducto")
+                        .HasConstraintName("FK_Tbl_DetalleInventario_Tbl_Producto")
+                        .IsRequired();
+
                     b.HasOne("SuperMark.Data.Entities.TblInventario", "IdInventarioNavigation")
                         .WithMany("TblDetalleInventario")
                         .HasForeignKey("IdInventario")
                         .HasConstraintName("FK_Tbl_DetalleInventario_Tbl_Inventario")
                         .IsRequired();
-
-                    b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
-                        .WithMany("TblDetalleInventario")
-                        .HasForeignKey("IdProducto")
-                        .HasConstraintName("FK_Tbl_DetalleInventario_Tbl_Producto")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SuperMark.Data.Entities.TblDetallePedido", b =>
                 {
+                    b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
+                        .WithMany("TblDetallePedido")
+                        .HasForeignKey("CodigoProducto")
+                        .HasConstraintName("Fk_Tbl_DetallePedido_Tbl_Producto")
+                        .IsRequired();
+
                     b.HasOne("SuperMark.Data.Entities.TblPedido", "IdPedidoNavigation")
                         .WithMany("TblDetallePedido")
                         .HasForeignKey("IdPedido")
                         .HasConstraintName("Fk_DetallePedido_Tbl_Pedido")
-                        .IsRequired();
-
-                    b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
-                        .WithMany("TblDetallePedido")
-                        .HasForeignKey("IdProducto")
-                        .HasConstraintName("Fk_Tbl_DetallePedido_Tbl_Producto")
                         .IsRequired();
                 });
 
@@ -1182,7 +1179,7 @@ namespace SuperMark.Migrations
                 {
                     b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
                         .WithMany("TblDetalleVenta")
-                        .HasForeignKey("IdProducto")
+                        .HasForeignKey("CodigoProducto")
                         .HasConstraintName("Fk_Tbl_DetalleVenta_Tbl_Producto")
                         .IsRequired();
 
@@ -1235,7 +1232,7 @@ namespace SuperMark.Migrations
                 {
                     b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
                         .WithMany("TblImagenProducto")
-                        .HasForeignKey("IdProducto")
+                        .HasForeignKey("CodigoProducto")
                         .HasConstraintName("Fk_ImagenProducto_Tbl_Producto")
                         .IsRequired();
                 });
@@ -1308,7 +1305,7 @@ namespace SuperMark.Migrations
                 {
                     b.HasOne("SuperMark.Data.Entities.TblProducto", "CodigoProductoNavigation")
                         .WithMany("TblUbicacion")
-                        .HasForeignKey("IdProducto")
+                        .HasForeignKey("CodigoProducto")
                         .HasConstraintName("FK_Tbl_Ubicacion_Tbl_Producto")
                         .IsRequired();
 
